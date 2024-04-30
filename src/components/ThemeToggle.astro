@@ -1,0 +1,102 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<script>
+  import { useDark } from "@vueuse/core";
+
+  class ThemeToggle extends HTMLElement {
+    constructor() {
+      super();
+
+      const isDark = useDark({ storageKey: "blog-theme" });
+
+      /** Set the theme to dark/light mode. */
+      const toggleTheme = () => {
+        isDark.value = !isDark.value;
+
+        // set html attribute data-theme
+        document.documentElement.setAttribute(
+          "data-theme",
+          isDark.value ? "dark" : "light"
+        );
+      };
+
+      /**
+       * Handle the click event.
+       * @param func toggle theme function
+       * @param ev MouseEvent
+       */
+      const handleClick = (func: () => {}, ev: MouseEvent): void => {
+        const { clientX: x, clientY: y } = ev;
+
+        // Calculate the maximum circle radius from the mouse click position to the viewport
+        const endRadius = Math.hypot(
+          Math.max(x, innerWidth - x),
+          Math.max(y, innerHeight - y)
+        );
+
+        document.documentElement.style.setProperty("--x", x + "px");
+        document.documentElement.style.setProperty("--y", y + "px");
+        document.documentElement.style.setProperty("--r", endRadius + "px");
+
+        const clipPath = [
+          `circle(0px at ${x}px ${y}px)`,
+          `circle(${endRadius}px at ${x}px ${y}px)`,
+        ];
+
+        /**
+         * see: https://developer.mozilla.org/en-US/docs/Web/API/Document/startViewTransition
+         */
+        if (document.startViewTransition) {
+          document.startViewTransition(() => func.call());
+        } else {
+          func.call();
+        }
+      };
+
+      // Toggle the theme when a user clicks the button.
+      const button = document.getElementById("btn");
+      button.addEventListener("click", (e) => handleClick(toggleTheme, e));
+    }
+  }
+  customElements.define("theme-toggle", ThemeToggle);
+</script>
+
+<theme-toggle>
+  <button id="btn">
+    <Icon icon="sun" class="icon light" />
+    <Icon icon="moon-stars" class="icon dark" />
+  </button>
+</theme-toggle>
+
+<style lang="scss">
+  button {
+    display: flex;
+    border: 0;
+    border-radius: 999rem;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .icon {
+    z-index: 1;
+    position: relative;
+    display: flex;
+    padding: 20px 10px;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+
+    color: var(--text-color);
+  }
+
+  :global(html.dark) .light {
+    display: none;
+  }
+
+  :global(html:not(.dark)) .dark {
+    display: none;
+  }
+</style>
