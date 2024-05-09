@@ -1,6 +1,7 @@
 ---
 import { BaseHead, Footer, FormattedDate, Header } from "@/components";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
 const posts = (await getCollection("blog")).sort(
@@ -91,7 +92,7 @@ const posts = (await getCollection("blog")).sort(
             posts.map((post) => (
               <li>
                 <a href={`/blog/${post.slug}/`}>
-                  <img
+                  <Image
                     width={720}
                     height={360}
                     src={post.data.heroImage}
