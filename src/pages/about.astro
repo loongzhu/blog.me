@@ -1,4 +1,5 @@
 ---
+import { Gravatar } from "@/components";
 import { BlogPost as Layout } from "@/layouts";
 ---
 
@@ -8,6 +9,8 @@ import { BlogPost as Layout } from "@/layouts";
   pubDate={new Date("August 08 2021")}
   heroImage="/blog-placeholder-about.jpg"
 >
+  <Gravatar />
+  <Gravatar url="/blog-placeholder-about.jpg" />
   <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
     tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo
