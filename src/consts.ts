@@ -3,3 +3,4 @@
 
 export const SITE_TITLE = 'My Astro Blog';
 export const SITE_DESCRIPTION = 'Welcome to my website!';
+export const MINE_EMAIL = 'mr.longzhentian@gmail.com';
