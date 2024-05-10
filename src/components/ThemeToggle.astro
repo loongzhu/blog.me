@@ -12,7 +12,7 @@ import { Icon } from ".";
       const isDark = useDark({ storageKey: "blog-theme" });
 
       /** Set the theme to dark/light mode. */
-      const toggleTheme = () => {
+      const toggleTheme = (): void => {
         isDark.value = !isDark.value;
 
         // set html attribute data-theme
@@ -27,7 +27,10 @@ import { Icon } from ".";
        * @param func toggle theme function
        * @param ev MouseEvent
        */
-      const handleClick = (func: () => {}, ev: MouseEvent): void => {
+      const handleClick = (
+        func: () => void,
+        ev: MouseEvent
+      ): void | Promise<void> => {
         const { clientX: x, clientY: y } = ev;
 
         // Calculate the maximum circle radius from the mouse click position to the viewport
@@ -40,24 +43,19 @@ import { Icon } from ".";
         document.documentElement.style.setProperty("--y", y + "px");
         document.documentElement.style.setProperty("--r", endRadius + "px");
 
-        const clipPath = [
-          `circle(0px at ${x}px ${y}px)`,
-          `circle(${endRadius}px at ${x}px ${y}px)`,
-        ];
-
         /**
          * see: https://developer.mozilla.org/en-US/docs/Web/API/Document/startViewTransition
          */
         if (document.startViewTransition) {
-          document.startViewTransition(() => func.call());
+          document.startViewTransition(() => func.call(this));
         } else {
-          func.call();
+          func.call(this);
         }
       };
 
       // Toggle the theme when a user clicks the button.
       const button = document.getElementById("btn");
-      button.addEventListener("click", (e) => handleClick(toggleTheme, e));
+      button?.addEventListener("click", (e) => handleClick(toggleTheme, e));
     }
   }
   customElements.define("theme-toggle", ThemeToggle);

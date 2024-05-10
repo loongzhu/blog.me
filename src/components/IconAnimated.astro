@@ -1,17 +1,17 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { iconPaths, icons } from "./IconPaths";
+import { icons } from "./IconPaths";
 
 interface Props {
-  icon: keyof typeof iconPaths;
+  icon: keyof typeof icons;
   color?: string;
   gradient?: boolean;
   size?: string;
 }
 
-const { class: customClass, gradient, icon, ...rest } = Astro.props;
+const { gradient, icon } = Astro.props;
 
-const { color, viewBox, size, path, invert = false } = icons[icon];
+const { color, viewBox, size, path } = icons[icon];
 
 const attrs: HTMLAttributes<"svg"> = {};
 if (size) attrs.style = { "--size": size };
@@ -23,15 +23,11 @@ const gradientId =
 <icon-animated class="icon">
   <div
     class="filled"
-    invert={color === "#181717" ? "" : undefined}
-    style={{
-      "--color": color,
-    }}
+    color-onvert={color === "#181717" ? "" : undefined}
+    style={{ "--color": color }}
   >
   </div>
   <svg
-    class={customClass}
-    {...rest}
     xmlns="http://www.w3.org/2000/svg"
     width="32"
     height="32"
@@ -107,7 +103,7 @@ const gradientId =
     }
   }
 
-  :global(.dark .filled[invert]) {
+  :global(.dark .filled[color-invert]) {
     filter: invert(1);
   }
 </style>
