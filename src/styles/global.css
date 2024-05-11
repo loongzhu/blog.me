@@ -8,6 +8,7 @@
 
 ::-webkit-scrollbar {
   width: var(--sb-size);
+  height: var(--sb-size);
 }
 
 ::-webkit-scrollbar-track {
@@ -20,12 +21,10 @@
   border-radius: var(--sb-border-radius);
 }
 
-::view-transition-old(root) {
-  animation: none;
-}
-
+::view-transition-old(root),
 ::view-transition-new(root) {
-  animation: clip 0.5s ease-in;
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 ::view-transition-old(root) {
@@ -36,29 +35,17 @@
   z-index: 9999;
 }
 
-.dark::view-transition-old(root) {
-  animation: clip 0.5s ease-in reverse;
-}
-
 .dark::view-transition-new(root) {
-  animation: none;
+  z-index: 1;
 }
 
 .dark::view-transition-old(root) {
   z-index: 9999;
 }
 
-.dark::view-transition-new(root) {
-  z-index: 1;
-}
-
-@keyframes clip {
-  from {
-    clip-path: circle(0% at var(--x) var(--y));
-  }
-  to {
-    clip-path: circle(var(--r) at var(--x) var(--y));
-  }
+/* Disable all other view transition when switching theme colors */
+.theme-clip * {
+  view-transition-name: none !important;
 }
 
 html {
@@ -120,6 +107,8 @@ h6 {
   margin: 0 0 0.5rem 0;
   color: var(--text-color);
   line-height: 1.2;
+
+  font-family: "Poetsen One", sans-serif;
 }
 h1 {
   font-size: 3.052em;
