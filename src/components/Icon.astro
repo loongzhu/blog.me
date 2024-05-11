@@ -1,9 +1,9 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { iconPaths } from "./IconPaths";
+import { icons, Icons } from "./icons";
 
 interface Props {
-  icon: keyof typeof iconPaths;
+  icon: Icons;
   color?: string;
   gradient?: boolean;
   size?: string;
@@ -19,7 +19,7 @@ const {
   ...rest
 } = Astro.props;
 
-const iconPath = iconPaths[icon];
+const { path, viewBox } = icons[icon];
 
 const attrs: HTMLAttributes<"svg"> = {};
 if (size) attrs.style = { "--size": size };
@@ -34,13 +34,13 @@ const gradientId =
   xmlns="http://www.w3.org/2000/svg"
   width="32"
   height="32"
-  viewBox="0 0 256 256"
+  viewBox={viewBox}
   aria-hidden="true"
   stroke={gradient ? `url(#${gradientId})` : color}
   fill={gradient ? `url(#${gradientId})` : color}
   {...attrs}
 >
-  <g set:html={iconPath} />
+  <g set:html={path} />
   {
     gradient && (
       <linearGradient
@@ -62,8 +62,8 @@ const gradientId =
 <style>
   svg {
     vertical-align: middle;
-    width: var(--size, 1em);
-    height: var(--size, 1em);
+    /* width: var(--size, 1em);
+    height: var(--size, 1em); */
     transition: color 0.5s ease-in-out;
   }
 </style>
