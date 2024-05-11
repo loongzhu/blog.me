@@ -64,7 +64,7 @@ import { Icon } from ".";
 <theme-toggle>
   <button id="btn">
     <Icon icon="sun" class="icon light" />
-    <Icon icon="moon-stars" class="icon dark" />
+    <Icon icon="moon" class="icon dark" />
   </button>
 </theme-toggle>
 
@@ -72,21 +72,12 @@ import { Icon } from ".";
   button {
     display: flex;
     border: 0;
-    border-radius: 999rem;
-    padding: 0;
     background-color: transparent;
     cursor: pointer;
+    padding: 1rem 0.5rem;
   }
 
   .icon {
-    z-index: 1;
-    position: relative;
-    display: flex;
-    padding: 20px 10px;
-    width: 2rem;
-    height: 2rem;
-    font-size: 1rem;
-
     color: var(--text-color);
   }
 

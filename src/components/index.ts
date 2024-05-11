@@ -8,4 +8,3 @@ export { default as Icon } from "./Icon.astro";
 export { default as IconAnimated } from "./IconAnimated.astro";
 export { default as Signature } from "./Signature.astro";
 export { default as ThemeToggle } from "./ThemeToggle.astro";
-
