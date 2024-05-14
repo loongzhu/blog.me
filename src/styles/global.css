@@ -208,4 +208,5 @@ hr {
 
 *::selection {
   background-color: var(--text-select-color);
+  color: var(--text-color) !important;
 }
