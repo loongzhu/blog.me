@@ -9,6 +9,14 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
   <head>
     <BaseHead title={title} description={description} />
 
+    <script is:inline>
+      const theme = localStorage.getItem("blog-theme");
+
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+
     <slot name="style" />
   </head>
   <body>
