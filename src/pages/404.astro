@@ -1,0 +1,184 @@
+---
+import { Gravatar } from "@/components";
+import { BaseLayout } from "@/layouts";
+import { MINE_NAME } from "@/consts";
+---
+
+<BaseLayout title="404 Not Found" description="404 Not Found">
+  <slot name="style">
+    <style lang="scss">
+      button {
+        padding: 10px 20px;
+        background-color: var(--bg-grid-color);
+        color: var(--text-color);
+        border: none;
+        border-radius: 100px;
+        cursor: pointer;
+        box-shadow: var(--box-shadow);
+
+        a {
+          text-decoration: none;
+          color: var(--text-color);
+        }
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+      }
+
+      .container {
+        width: fit-content;
+      }
+
+      :global(p) {
+        font-size: 24px;
+        letter-spacing: 0.2px;
+        margin: 0;
+        width: fit-content;
+        position: relative;
+        white-space: pre-wrap;
+        user-select: none;
+
+        &:last-child:after {
+          position: absolute;
+          content: "";
+          display: block;
+          width: 16px;
+          height: 32px;
+          border-bottom: 2px solid #000;
+          right: 0;
+          top: 0;
+          transform: translateX(100%);
+          animation: flashing 0.5s ease-in-out infinite;
+        }
+      }
+
+      @keyframes flashing {
+        0% {
+          opacity: 1;
+        }
+
+        50% {
+          opacity: 0;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+
+      :global(footer) {
+        // display: none;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+    </style>
+  </slot>
+  <script is:inline type="module">
+    function initContent(isClear = false) {
+      const container = document.getElementById("container");
+      const all = container.querySelectorAll("p");
+
+      const content = Array.from(all).map((item) => {
+        return item.innerHTML.replace("&nbsp;", " ");
+      });
+
+      if (isClear) container.innerHTML = "<p></p>";
+
+      return { container, content };
+    }
+
+    const { container, content } = initContent(true);
+
+    function getLast() {
+      const all = container.querySelectorAll("p");
+      return all[all.length - 1];
+    }
+
+    function add() {
+      let part = 0,
+        index = 0;
+
+      const interval = setInterval(() => {
+        const text = content[part];
+
+        if (index >= text.length) {
+          part += 1;
+
+          if (part >= content.length) {
+            clearInterval(interval);
+
+            setTimeout(() => {
+              remove();
+            }, delay);
+
+            return;
+          }
+
+          const newP = document.createElement("p");
+          container.appendChild(newP);
+
+          index = 0;
+          return;
+        }
+
+        const last = getLast();
+        last.innerHTML = last.innerHTML + text[index];
+        index += 1;
+      }, speed);
+    }
+
+    function remove() {
+      let part = content.length - 1;
+      let index = content[part].length - 1;
+
+      const interval = setInterval(() => {
+        const text = content[part];
+
+        const last = getLast();
+
+        last.innerHTML = last.innerHTML.substring(0, index);
+        index -= 1;
+
+        if (index < 0) {
+          part -= 1;
+          if (part < 0) {
+            clearInterval(interval);
+            setTimeout(() => {
+              add();
+            }, delay);
+            return;
+          }
+          last.remove();
+          index = content[part].length - 1;
+        }
+      }, speed);
+    }
+
+    const speed = 100;
+    const delay = 2000;
+
+    add();
+  </script>
+
+  <div class="content">
+    <Gravatar size={160} />
+    <button>
+      <a href="/">Back to Home</a>
+    </button>
+
+    <div id="container" class="container">
+      <p>Hi! I'm {MINE_NAME}.</p>
+      <p>Welcome to your arrival!</p>
+      <p>There may be a small error.</p>
+      <p>404, page not found.</p>
+    </div>
+  </div>
+</BaseLayout>

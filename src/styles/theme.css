@@ -11,6 +11,7 @@
 
   --bg-color: #f3f3f3;
   --bg-grid-color: #e1e1e1;
+  --gray-color: rgb(var(--gray-dark));
 
   --sb-size: 6px;
   --sb-border-radius: 3px;
@@ -26,6 +27,7 @@
   --bg-color: #050505;
   --bg-grid-color: rgba(114, 114, 114, 0.3);
   --sb-thumb-color: #555555;
+  --gray-color: rgb(var(--gray-light));
 
   --text-color: #bbb;
   --text-select-color: #282828;
