@@ -1,0 +1,77 @@
+---
+
+---
+
+<script>
+  import { useWindowScroll, watchDeep } from "@vueuse/core";
+
+  class ToTop extends HTMLElement {
+    constructor() {
+      super();
+
+      const totop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      };
+
+      const element = document.getElementById("totop");
+
+      element?.addEventListener("click", (e) => totop());
+    }
+    connectedCallback() {
+      console.log("The element has been attached to the DOM.");
+    }
+
+    disconnectedCallback() {
+      console.log("The element has been removed from the DOM.");
+    }
+
+    adoptedCallback() {
+      console.log("The element has been moved to a new DOM.");
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+      console.log(`${name} has changed from ${oldValue} to ${newValue}.`);
+    }
+  }
+
+  const { y } = useWindowScroll();
+
+  watchDeep(y, (value) => {
+    const element = document.getElementById("totop");
+
+    element.style.display = value > 300 ? "grid" : "none";
+  });
+
+  customElements.define("to-top", ToTop);
+</script>
+
+<to-top id="totop"></to-top>
+
+<style lang="scss">
+  to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    background-color: var(--gray-color-bg);
+    display: none;
+    place-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    color: var(--sb-thumb-color);
+    &::after {
+      content: "🡡";
+      display: block;
+    }
+
+    &:hover {
+      background-color: var(--bg-grid-color);
+      color: var(--text-color);
+    }
+  }
+</style>

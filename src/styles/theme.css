@@ -17,6 +17,7 @@
   --sb-border-radius: 3px;
   --sb-track-color: transparent;
   --sb-thumb-color: #919191;
+  --gray-color-bg: rgb(var(--gray-light));
 
   --text-color: #555;
   --text-select-color: #dfdfdf;
@@ -28,6 +29,7 @@
   --bg-grid-color: rgba(114, 114, 114, 0.3);
   --sb-thumb-color: #555555;
   --gray-color: rgb(var(--gray-light));
+  --gray-color-bg: rgb(var(--gray-dark));
 
   --text-color: #bbb;
   --text-select-color: #282828;
