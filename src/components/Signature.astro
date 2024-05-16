@@ -4,7 +4,7 @@
 
 <script></script>
 
-<signature class="signature">
+<signature grid-center>
   <svg
     style="transform: translate3d(0, 0, 0)"
     version="1.1"
@@ -21,11 +21,6 @@
 </signature>
 
 <style lang="scss">
-  .signature {
-    display: grid;
-    place-items: center;
-  }
-
   svg {
     width: 120px;
     height: 30px;
@@ -35,9 +30,10 @@
     stroke-dasharray: 2400;
     stroke-dashoffset: 2400;
     fill: transparent;
-    stroke: var(--text-color);
     stroke-width: 2;
     animation: drawSignature 6s linear infinite;
+
+    @apply stroke-text;
   }
 
   @keyframes drawSignature {
@@ -52,7 +48,7 @@
     45%,
     60% {
       stroke-dashoffset: 0;
-      fill: var(--text-color);
+      @apply fill-text;
     }
 
     95%,

@@ -3,29 +3,29 @@ import { SITE_TITLE } from "@/consts";
 import { HeaderLink, Icon, ThemeToggle, ToTop } from ".";
 ---
 
-<header>
-  <nav>
-    <h2><a href="/">{SITE_TITLE}</a></h2>
+<header m-0 px-16>
+  <nav flex-center justify-between>
+    <h2 m-0><a text-center select-none font-bold href="/">{SITE_TITLE}</a></h2>
 
     <div class="internal-links">
       <HeaderLink href="/">Home</HeaderLink>
       <HeaderLink href="/blog">Blog</HeaderLink>
       <HeaderLink href="/project">Project</HeaderLink>
       <HeaderLink href="/about">About</HeaderLink>
-      <HeaderLink href="/404">404</HeaderLink>
+      <HeaderLink href="/4asdad04">404</HeaderLink>
     </div>
-    <div class="social-links">
+    <div class="social-links" flex>
       <ThemeToggle />
       <a href="https://m.webtoo.ls/@astro" target="_blank">
-        <span class="sr-only">Follow Astro on Mastodon</span>
+        <span sr-only>Follow Astro on Mastodon</span>
         <Icon icon="mastodon" />
       </a>
       <a href="https://twitter.com/astrodotbuild" target="_blank">
-        <span class="sr-only">Follow Astro on Twitter</span>
+        <span sr-only>Follow Astro on Twitter</span>
         <Icon icon="twitter" />
       </a>
       <a href="https://github.com/withastro/astro" target="_blank">
-        <span class="sr-only">Go to Astro's GitHub repo</span>
+        <span sr-only>Go to Astro's GitHub repo</span>
         <Icon icon="github" />
       </a>
     </div>
@@ -35,15 +35,28 @@ import { HeaderLink, Icon, ThemeToggle, ToTop } from ".";
 </header>
 <style lang="scss">
   header {
-    margin: 0;
-    padding: 0 1em;
-    /* background: white; */
     box-shadow: 0 2px 8px rgba(var(--black), 5%);
   }
+
   h2 {
-    margin: 0;
     font-size: 1em;
-    user-select: none;
+
+    a {
+      background-image: -webkit-linear-gradient(
+        right,
+        #833ab4,
+        #fd1d1d 15%,
+        #fcb045 30%,
+        #833ab4 45%,
+        #fd1d1d 60%,
+        #fcb045 75%,
+        #833ab4
+      );
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-background-size: 200% 100%;
+      -webkit-animation: masked-animation 1.5s infinite linear;
+    }
   }
 
   @-webkit-keyframes masked-animation {
@@ -55,62 +68,16 @@ import { HeaderLink, Icon, ThemeToggle, ToTop } from ".";
     }
   }
 
-  h2 a,
-  h2 a.active {
-    text-decoration: none;
-
-    text-align: center;
-    color: hsla(0, 0%, 100%, 0.65);
-    font-weight: 800;
-    background-image: -webkit-linear-gradient(
-      right,
-      #833ab4,
-      #fd1d1d 15%,
-      #fcb045 30%,
-      #833ab4 45%,
-      #fd1d1d 60%,
-      #fcb045 75%,
-      #833ab4
-    );
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    -webkit-background-size: 200% 100%;
-    -webkit-animation: masked-animation 1.5s infinite linear;
-  }
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  nav a {
-    padding: 0 0.5em;
-    color: var(--text-color);
-    text-decoration: none;
-    user-select: none;
-  }
-  nav a.active {
-    text-decoration: none;
-  }
-
   .internal-links:hover > :not(:hover) {
     &:not(.active) {
-      opacity: 0.6;
       // filter: blur(1px);
+      @apply op60;
     }
   }
 
   .social-links {
-    display: flex;
     a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 0.5em;
+      @apply flex-center px-8;
     }
   }
   @media (max-width: 720px) {

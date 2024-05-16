@@ -1,37 +1,17 @@
 :root {
   --accent: #2337ff;
-  --accent-dark: #000d8a;
   --black: 15, 18, 25;
   --gray: 96, 115, 159;
   --gray-light: 229, 233, 240;
   --gray-dark: 34, 41, 57;
-  --gray-gradient: rgba(var(--gray-light), 50%), #fff;
   --box-shadow: 0 2px 6px rgba(var(--gray), 25%),
     0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%);
 
-  --bg-color: #f3f3f3;
   --bg-grid-color: #e1e1e1;
   --gray-color: rgb(var(--gray-dark));
-
-  --sb-size: 6px;
-  --sb-border-radius: 3px;
-  --sb-track-color: transparent;
-  --sb-thumb-color: #919191;
-  --gray-color-bg: rgb(var(--gray-light));
-
-  --text-color: #555;
-  --text-select-color: #dfdfdf;
-  --text-active-color: #000;
 }
 
 :root.dark {
-  --bg-color: #050505;
-  --bg-grid-color: rgba(114, 114, 114, 0.3);
-  --sb-thumb-color: #555555;
+  --bg-grid-color: #7272724d;
   --gray-color: rgb(var(--gray-light));
-  --gray-color-bg: rgb(var(--gray-dark));
-
-  --text-color: #bbb;
-  --text-select-color: #282828;
-  --text-active-color: #fff;
 }

@@ -10,41 +10,29 @@ const today = new Date();
   {MINE_NAME}. All rights reserved.
   <div class="social-links">
     <a href="https://m.webtoo.ls/@astro" target="_blank">
-      <span class="sr-only">Follow Astro on Mastodon</span>
+      <span sr-only>Follow Astro on Mastodon</span>
       <IconAnimated icon="mastodon" />
     </a>
     <a href="https://twitter.com/astrodotbuild" target="_blank">
-      <span class="sr-only">Follow Astro on Twitter</span>
+      <span sr-only>Follow Astro on Twitter</span>
       <IconAnimated icon="twitter" />
     </a>
     <a href="https://github.com/withastro/astro" target="_blank">
-      <span class="sr-only">Follow Astro on Github</span>
+      <span sr-only>Follow Astro on Github</span>
       <IconAnimated icon="github" />
     </a>
     <a href="https://www.youtube.com/@astrodotbuild">
-      <span class="sr-only">Follow Astro on YouTube</span>
+      <span sr-only>Follow Astro on YouTube</span>
       <IconAnimated icon="youtube" />
     </a>
   </div>
 </footer>
 <style>
   footer {
-    padding: 2em 1em 6em 1em;
-    /* background: linear-gradient(var(--gray-gradient)) no-repeat; */
-    color: rgb(var(--gray));
-    text-align: center;
+    padding: 2em 1em 4em 1em;
+    @apply text-18 text-center color-border;
   }
   .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1em;
-    margin-top: 1em;
-  }
-  .social-links a {
-    text-decoration: none;
-    color: rgb(var(--gray));
-  }
-  .social-links a:hover {
-    color: rgb(var(--gray-dark));
+    @apply flex-center justify-center gap-16 m-t-16;
   }
 </style>

@@ -63,15 +63,12 @@ async function sha256(message: string): Promise<string> {
   .avatar {
     width: var(--size);
     height: var(--size);
-    display: inline-block;
-    overflow: hidden;
-    border-radius: 50%;
     box-shadow: var(--box-shadow);
 
+    @apply border-rd-full inline-block overflow-hidden select-none;
+
     & > img {
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
+      @apply h-full w-full object-cover object-center;
     }
   }
 </style>

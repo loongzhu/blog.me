@@ -7,53 +7,14 @@ import { MINE_NAME } from "@/consts";
 <BaseLayout title="404 Not Found" description="404 Not Found">
   <slot name="style">
     <style lang="scss">
-      button {
-        padding: 10px 20px;
-        background-color: var(--bg-grid-color);
-        color: var(--text-color);
-        border: none;
-        border-radius: 100px;
-        cursor: pointer;
-        box-shadow: var(--box-shadow);
-
-        a {
-          text-decoration: none;
-          color: var(--text-color);
-        }
-      }
-
-      .content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 40px;
-      }
-
-      .container {
-        width: fit-content;
-      }
-
       :global(p) {
-        font-size: 24px;
-        letter-spacing: 0.2px;
-        margin: 0;
-        width: fit-content;
-        position: relative;
-        white-space: pre-wrap;
-        user-select: none;
+        @apply relative select-none w-fit m-0 text-24 tracking-0.2 whitespace-pre-wrap;
 
         &:last-child:after {
-          position: absolute;
           content: "";
-          display: block;
-          width: 16px;
-          height: 32px;
-          border-bottom: 2px solid #000;
-          right: 0;
-          top: 0;
-          transform: translateX(100%);
           animation: flashing 0.5s ease-in-out infinite;
+
+          @apply absolute w-16 h-32 right-0 top-0 block border-color-bg-reverse border-b-2 border-b-solid translate-x-100%;
         }
       }
 
@@ -72,7 +33,6 @@ import { MINE_NAME } from "@/consts";
       }
 
       :global(footer) {
-        // display: none;
         width: 100%;
         position: absolute;
         bottom: 0;
@@ -168,13 +128,13 @@ import { MINE_NAME } from "@/consts";
     add();
   </script>
 
-  <div class="content">
+  <div flex-center gap-40 flex-col>
     <Gravatar size={160} />
-    <button>
-      <a href="/">Back to Home</a>
+    <button btn-rect>
+      <a color-text hover:color-text href="/">Back to Home</a>
     </button>
 
-    <div id="container" class="container">
+    <div id="container" w-fit>
       <p>Hi! I'm {MINE_NAME}.</p>
       <p>Welcome to your arrival!</p>
       <p>There may be a small error.</p>

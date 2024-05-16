@@ -16,62 +16,62 @@
         });
       };
 
-      const element = document.getElementById("totop");
+      const element = this.querySelector("button");
 
       element?.addEventListener("click", (e) => totop());
+
+      const { y } = useWindowScroll();
+
+      watchDeep(
+        y,
+        (value) => {
+          const element = this.querySelector("button");
+
+          element.style.display = value > 300 ? "grid" : "none";
+
+          if (value > 300) {
+            element?.classList.remove("op0", "pointer-events-none");
+          } else {
+            element?.classList.add("op0", "pointer-events-none");
+          }
+        },
+        {
+          immediate: true,
+        }
+      );
     }
     connectedCallback() {
-      console.log("The element has been attached to the DOM.");
+      // console.log("The element has been attached to the DOM.");
     }
 
     disconnectedCallback() {
-      console.log("The element has been removed from the DOM.");
+      // console.log("The element has been removed from the DOM.");
     }
 
     adoptedCallback() {
-      console.log("The element has been moved to a new DOM.");
+      // console.log("The element has been moved to a new DOM.");
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-      console.log(`${name} has changed from ${oldValue} to ${newValue}.`);
+      // console.log(`${name} has changed from ${oldValue} to ${newValue}.`);
     }
   }
-
-  const { y } = useWindowScroll();
-
-  watchDeep(y, (value) => {
-    const element = document.getElementById("totop");
-
-    element.style.display = value > 300 ? "grid" : "none";
-  });
 
   customElements.define("to-top", ToTop);
 </script>
 
-<to-top id="totop"></to-top>
+<to-top>
+  <button class="op0" btn-circle></button>
+</to-top>
 
 <style lang="scss">
   to-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    height: 40px;
-    width: 40px;
-    border-radius: 20px;
-    background-color: var(--gray-color-bg);
-    display: none;
-    place-items: center;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    color: var(--sb-thumb-color);
+    @apply fixed bottom-20 right-20 z-1000;
+  }
+  button {
     &::after {
       content: "🡡";
-      display: block;
-    }
-
-    &:hover {
-      background-color: var(--bg-grid-color);
-      color: var(--text-color);
+      @apply absolute;
     }
   }
 </style>

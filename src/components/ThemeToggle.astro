@@ -91,15 +91,11 @@ import { Icon } from ".";
 
 <style lang="scss">
   button {
-    display: flex;
-    border: 0;
-    background-color: transparent;
-    cursor: pointer;
-    padding: 1rem 0.5rem;
+    @apply flex cursor-pointer border-none bg-transparent py-16 px-8;
   }
 
   .icon {
-    color: var(--text-color);
+    @apply color-text;
   }
 
   :global(html.dark) .light {
