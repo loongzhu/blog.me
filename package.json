@@ -17,10 +17,10 @@
     "@astrojs/sitemap": "^3.1.4",
     "@types/dom-view-transitions": "^1.0.4",
     "@vueuse/core": "^10.9.0",
-    "astro": "^4.8.4",
+    "astro": "^4.8.6",
     "crypto-js": "^4.2.0",
     "rimraf": "^5.0.7",
-    "sass": "^1.77.1",
+    "sass": "^1.77.2",
     "typescript": "^5.4.5"
   },
   "devDependencies": {
